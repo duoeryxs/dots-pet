@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Clawd</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="pet-container">
+    <!-- Speech bubble -->
+    <div id="speech-bubble" class="hidden">
+      <span id="speech-text"></span>
+    </div>
+
+    <!-- Clawd -->
+    <div id="claude" class="idle">
+      <canvas id="clawd-canvas" width="144" height="128"></canvas>
+    </div>
+
+    <!-- Particle container -->
+    <div id="particles"></div>
+
+    <!-- Status bar -->
+    <div id="status-bar">
+      <span id="mood-icon">😊</span>
+      <span id="status-text">陪你上班中~</span>
+    </div>
+  </div>
+
+  <!-- Game overlay -->
+  <div id="game-overlay" class="hidden">
+    <div id="game-content"></div>
+  </div>
+
+  <!-- Right-click menu -->
+  <div id="context-menu" class="hidden">
+    <div class="menu-item" data-action="wave">👋 打招呼</div>
+    <div class="menu-item" data-action="dance">💃 跳个舞</div>
+    <div class="menu-item" data-action="spin">🌀 转圈圈</div>
+    <div class="menu-item" data-action="rps">✊ 猜拳游戏</div>
+    <div class="menu-item" data-action="guess">🔢 猜数字</div>
+    <div class="menu-item" data-action="flip">🪙 抛硬币</div>
+    <div class="menu-item" data-action="fortune">🔮 今日运势</div>
+    <div class="menu-separator"></div>
+    <div class="menu-item" data-action="sleep">😴 休息一下</div>
+  </div>
+
+  <script src="clawd.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
