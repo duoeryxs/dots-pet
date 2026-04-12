@@ -4,7 +4,17 @@
 
 <img src="images/normal.png" width="80" /> <img src="images/stare.png" width="80" /> <img src="images/sleeping.png" width="60" /> <img src="images/flail.png" width="80" />
 
-## 启动
+## 安装（macOS）
+
+1. 双击 `DotsPet.dmg` 打开磁盘映像
+2. 把 **dots-pet** 拖进 **Applications** 文件夹
+3. 双击打开 dots-pet，系统会弹安全提示，**先关掉没关系**
+4. 打开 **系统设置 → 隐私与安全性**，往下滑找到「已阻止打开 dots-pet」，点 **仍要打开**
+5. 输入密码确认，点点就来了
+
+> 只有第一次需要这样操作，之后可以正常双击启动。
+
+## 开发
 
 ```bash
 cd ~/projects/claude-pet

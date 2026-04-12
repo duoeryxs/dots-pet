@@ -1108,8 +1108,15 @@ class ChatThread(QThread):
                         self.chunk_received.emit(clean)
                     elif obj.get("type") == "selected_image":
                         selected_images.update(obj.get("selected_image", {}))
+        except urllib.error.HTTPError as e:
+            if e.code == 502:
+                full_text = "连不上服务器，可能没连公司网络/VPN哦"
+            else:
+                full_text = f"服务器返回了错误（{e.code}），稍后再试试"
+        except urllib.error.URLError:
+            full_text = "网络不通，检查一下WiFi或VPN连接吧"
         except Exception as e:
-            full_text = f"网络出了点问题：{e}"
+            full_text = f"出了点问题：{e}"
 
         # 保存raw data日志
         try:
@@ -2272,6 +2279,13 @@ class ClawdPet(QWidget):
         self._go(State.HAPPY)
         self._say(line, 5000)
 
+    def event(self, ev):
+        """切输入法时焦点会短暂离开，WindowActivate时抢回焦点"""
+        from PyQt6.QtCore import QEvent
+        if ev.type() == QEvent.Type.WindowActivate and self.chat_input.isVisible():
+            self.chat_input.setFocus()
+        return super().event(ev)
+
     def _on_chat_input_changed(self, text):
         """输入框随文字长度动态变宽"""
         if self.chat_input.isVisible():
@@ -2464,6 +2478,8 @@ class ClawdPet(QWidget):
         self.chat_input.setFixedWidth(self._chat_input_min_w)
         self.chat_input.move(max(0, SPRITE_W // 2 - self._chat_input_min_w // 2), self.chat_input.y())
         self.chat_input.show()
+        self.chat_input.setAttribute(Qt.WidgetAttribute.WA_InputMethodEnabled, True)
+        self.activateWindow()
         self.chat_input.setFocus()
         self.chat_input.raise_()
         self._chat_input_timer.start(self._chat_input_idle)
