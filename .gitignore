@@ -6,3 +6,6 @@ dist/
 .venv/
 node_modules/
 .pet_config.json
+sprites_new/
+sprite_gen.py
+chat_logs/
